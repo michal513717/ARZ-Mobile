@@ -4,7 +4,7 @@ export const COLORS = {
   primary: "#0782F9",
   white: "#FFFFFF",
   black: "#000000",
-  lightGray: "#D3D3D3"
+  lightGray: "#e7e5e4"
 };
 
 const styles = StyleSheet.create({
@@ -55,21 +55,11 @@ const styles = StyleSheet.create({
   buttonOutlineText: {
     color: COLORS.primary,
   },
-  googleButton: {
-    backgroundColor: COLORS.white,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 30,
+  mainMain: {
     width: "100%",
-    padding: 15,
-    borderRadius: 10,
-  },
-  googleIcon: {
-    marginRight: 10,
-	height: 24,
-    width: 24,
-  },
+    padding: 10,
+    alignItems: "center"
+  }
 });
 
 export default styles;
