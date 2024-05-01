@@ -1,57 +1,47 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { FIREBASE_AUTH } from "../utils/firebase/index";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { FIREBASE_AUTH } from "../utils/firebase";
 import { useState } from "react";
+import { useAuthStore } from "../stores/authStore";
 
 const useFirebaseAuth = () => {
-    const [isLoading, setLoading] = useState<boolean>(false);
-    const [password, setPassword] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
+  const { email, setEmail, setUser, user } = useAuthStore();
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    const signIn = async () => {
-        setLoading(true);
-        try {
-            await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
-        } catch (error) {
-            alert("Sign in failed: " + error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+  const signIn = async () => {
+    setLoading(true);
+    try {
+      await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
+    } catch (error) {
+      alert("Sign in failed: " + error.message);
 
-    const signUp = async () => {
-        setLoading(true);
-        try {
-            await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
-            alert("Check your email!");
-        } catch (error) {
-            alert("Sign up failed: " + error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const signInWithGoogle = async () => {
-        setLoading(true);
-        try {
-            const provider = new GoogleAuthProvider();
-            await signInWithPopup(FIREBASE_AUTH, provider);
-        } catch (error) {
-            alert("Google sign in failed: " + error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+  const signUp = async () => {
+    setLoading(true);
+    try {
+      await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
+      alert("Check your email!");
+    } catch (error) {
+      alert("Sign up failed: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    return {
-        email,
-        setEmail,
-        password,
-        setPassword,
-        isLoading,
-        signIn,
-        signUp,
-        signInWithGoogle,
-    };
+  return {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    loading,
+    signIn,
+    signUp
+  };
 };
 
 export default useFirebaseAuth;

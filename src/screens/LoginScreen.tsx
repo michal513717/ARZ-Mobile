@@ -1,86 +1,68 @@
 import React from "react";
-import { useEffect } from "react";
 import {
-    View,
-    Text,
-    TextInput,
-    KeyboardAvoidingView,
-    ActivityIndicator,
-    TouchableOpacity,
-    Image,
+  View,
+  Text,
+  TextInput,
+  KeyboardAvoidingView,
+  ActivityIndicator,
+  TouchableOpacity,
+  Image,
 } from "react-native";
 import useFirebaseAuth from "../hooks/useFirebaseAuth";
-import { FIREBASE_AUTH } from "../utils/firebase/index";
 import { useNavigation } from "@react-navigation/native";
+import styles, { COLORS } from "../utils/styles/styles";
 
 const LoginScreen = () => {
-    const {
-        email,
-        setEmail,
-        password,
-        setPassword,
-        isLoading,
-        signIn,
-        signUp,
-        signInWithGoogle,
-    } = useFirebaseAuth();
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    loading,
+    signIn,
+    signUp
+  } = useFirebaseAuth();
 
-    const auth = FIREBASE_AUTH;
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            if (user) {
-                navigation.replace("Home");
-            }
-        });
+  return (
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <View style={styles.inputContainer}>
 
-        return unsubscribe;
-    }, []);
+        <TextInput
+          value={email}
+          style={styles.input}
+          placeholder="Email"
+          onChangeText={(text) => setEmail(text)}
+        />
 
-    return (
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
-            <View style={styles.inputContainer}>
+        <TextInput
+          secureTextEntry={true}
+          value={password}
+          style={styles.input}
+          placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+        />
 
-                <TextInput
-                    value={email}
-                    style={styles.input}
-                    placeholder="Email"
-                    onChangeText={(text) => setEmail(text)}
-                />
+      </View>
 
-                <TextInput
-                    secureTextEntry={true}
-                    value={password}
-                    style={styles.input}
-                    placeholder="Password"
-                    onChangeText={(text) => setPassword(text)}
-                />
+      {loading ? (
+        <ActivityIndicator size="large" color={COLORS.primary} />
+      ) : (
+        <View style={styles.buttonContainer}>
 
-            </View>
+          <TouchableOpacity style={styles.button} onPress={signIn}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
 
-            {isLoading ? (
-                <ActivityIndicator size="large" color={COLORS.primary} />
-            ) : (
-                <View style={styles.buttonContainer}>
+          <TouchableOpacity style={[styles.button, styles.buttonOutline]} onPress={signUp}>
+            <Text style={[styles.buttonText, styles.buttonOutlineText]}>Create account</Text>
+          </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.button} onPress={signIn}>
-                        <Text style={styles.buttonText}>Login</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={[styles.button, styles.buttonOutline]} onPress={signUp}>
-                        <Text style={[styles.buttonText, styles.buttonOutlineText]}>Create account</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={[styles.googleButton, styles.buttonOutline]} onPress={signInWithGoogle}>
-                        <Image style={styles.googleIcon} source={require("../assets/google.png")} /> 
-                        <Text style={[styles.buttonText, styles.buttonOutlineText]}>Login with Google</Text>
-                    </TouchableOpacity>
-
-                </View>
-            )}
-        </KeyboardAvoidingView>
-    );
+        </View>
+      )}
+    </KeyboardAvoidingView>
+  );
 };
 
 export default LoginScreen;
