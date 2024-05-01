@@ -1,16 +1,8 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  KeyboardAvoidingView,
-  ActivityIndicator,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { TouchableOpacity } from "react-native";
 import useFirebaseAuth from "../hooks/useFirebaseAuth";
 import { useNavigation } from "@react-navigation/native";
-import styles, { COLORS } from "../utils/styles/styles";
+import { Center, Text, Box, VStack, InputField, Input } from "@gluestack-ui/themed";
 
 const LoginScreen = () => {
   const {
@@ -19,50 +11,92 @@ const LoginScreen = () => {
     password,
     setPassword,
     loading,
-    signIn,
-    signUp
+    signIn
   } = useFirebaseAuth();
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   return (
-    <KeyboardAvoidingView style={styles.loginContainer} behavior="padding">
-      <View style={styles.inputContainer}>
+    <Center>
+      <Box paddingTop={120}>
+        <Text
+          lineHeight={82}
+          fontSize={55}
+          fontWeight="$700"
+          color="#2071ff"
+        > Log In </Text>
+      </Box>
 
-        <TextInput
-          value={email}
-          style={styles.input}
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
-        />
+      <VStack space="xs" width="80%" paddingTop={60}>
+        <Text color="$text500" lineHeight="$xs">
+          Email
+        </Text>
+        <Input>
+          <InputField type="text" placeholder="abcd@domain.com" onChangeText={setEmail} value={email}/>
+        </Input>
+      </VStack>
 
-        <TextInput
-          secureTextEntry={true}
-          value={password}
-          style={styles.input}
-          placeholder="Password"
-          onChangeText={(text) => setPassword(text)}
-        />
+      <VStack space="xs" width="80%" paddingTop={30}>
+        <Text color="$text500" lineHeight="$xs">
+          Password
+        </Text>
+        <Input>
+          <InputField type="password" placeholder="**********" onChangeText={setPassword} value={password}/>
+        </Input>
+      </VStack>
 
-      </View>
+      <TouchableOpacity
+        onPress={signIn}
+      >
+        <Box
+          bg="#6198FF"
+          w={177} h={59}
+          justifyContent="center"
+          alignItems="center"
+          marginTop={120}
+          borderRadius={10}
+        >
+          <Text
+            color="#ffffff"
+            fontWeight="$800"
+            fontSize={24}
+          >
+            Log In
+          </Text>
+        </Box>
+      </TouchableOpacity>
 
-      {loading ? (
-        <ActivityIndicator size="large" color={COLORS.primary} />
-      ) : (
-        <View style={styles.buttonContainer}>
+      <Box flexDirection='row' alignItems='center' paddingTop={10} paddingBottom={10}>
+        <Box width={60} height={1} backgroundColor='black' />
+        <Box>
+          <Text width={50} textAlign='center'>Or</Text>
+        </Box>
+        <Box width={60} height={1} backgroundColor='black' />
+      </Box>
 
-          <TouchableOpacity style={styles.button} onPress={signIn}>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={[styles.button, styles.buttonOutline]} onPress={signUp}>
-            <Text style={[styles.buttonText, styles.buttonOutlineText]}>Create account</Text>
-          </TouchableOpacity>
-
-        </View>
-      )}
-    </KeyboardAvoidingView>
+      <TouchableOpacity
+        onPress={ ()=> navigation.navigate('RegisterScreen') }
+      >
+        <Box
+          bg="#ffffff"
+          w={177} h={59}
+          justifyContent="center"
+          alignItems="center"
+          borderColor="#6198ff"
+          borderWidth={2}
+          borderRadius={10}
+        >
+          <Text
+            color="#6b6b6b"
+            fontWeight="$800"
+            fontSize={24}
+          >
+            Sign Up
+          </Text>
+        </Box>
+      </TouchableOpacity>
+    </Center>
   );
-};
+}
 
 export default LoginScreen;
