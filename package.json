@@ -23,6 +23,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.73.5",
+    "react-native-gesture-handler": "^2.16.0",
+    "react-native-maps": "^1.14.0",
     "react-native-svg": "^13.4.0",
     "react-native-web": "~0.19.6",
     "zustand": "^4.5.2",
