@@ -5,6 +5,7 @@ import { useAuthStore } from "./src/stores/authStore";
 import MainStack from "./src/navigationStacks/mainStack";
 import AuthStack from "./src/navigationStacks/authStack";
 import { FIREBASE_AUTH } from "./src/utils/firebase";
+import { config } from "@gluestack-ui/config";
 
 export default function App() {
   const [isAuthorizated, setIsAuthorizated] = useState(false);
@@ -23,7 +24,7 @@ export default function App() {
   }, []);
 
   return (
-    <GluestackUIProvider>
+    <GluestackUIProvider config={config}>
       <NavigationContainer>
         {
           isAuthorizated ? (

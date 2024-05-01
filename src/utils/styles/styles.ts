@@ -4,13 +4,19 @@ export const COLORS = {
   primary: "#0782F9",
   white: "#FFFFFF",
   black: "#000000",
+  lightGray: "#D3D3D3"
 };
 
 const styles = StyleSheet.create({
-  container: {
+  loginContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  containerContent:{
+    height: "100%",
+    width: "100%",
+    backgroundColor: COLORS.lightGray
   },
   inputContainer: {
     width: "80%",

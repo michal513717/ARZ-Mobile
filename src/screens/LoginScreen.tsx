@@ -26,7 +26,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView style={styles.loginContainer} behavior="padding">
       <View style={styles.inputContainer}>
 
         <TextInput
