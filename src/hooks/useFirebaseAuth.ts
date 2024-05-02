@@ -6,6 +6,7 @@ import { useAuthStore } from "../stores/authStore";
 const useFirebaseAuth = () => {
   const { email, setEmail, setUser, user } = useAuthStore();
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const signIn = async () => {
@@ -23,6 +24,11 @@ const useFirebaseAuth = () => {
 
   const signUp = async () => {
     setLoading(true);
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        setLoading(false);
+        return;
+    }
     try {
       await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
       alert("Check your email!");
@@ -38,6 +44,8 @@ const useFirebaseAuth = () => {
     setEmail,
     password,
     setPassword,
+    confirmPassword,
+    setConfirmPassword,
     loading,
     signIn,
     signUp

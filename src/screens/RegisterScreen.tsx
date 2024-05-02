@@ -10,6 +10,8 @@ const RegisterScreen = () => {
     setEmail,
     password,
     setPassword,
+    confirmPassword,
+    setConfirmPassword,
     loading,
     signUp
   } = useFirebaseAuth();
@@ -51,7 +53,7 @@ const RegisterScreen = () => {
             Confirm Password
           </Text>
           <Input>
-            <InputField type="password" placeholder="**********" value={password} onChangeText={setPassword}/>
+            <InputField type="password" placeholder="**********" value={confirmPassword} onChangeText={setConfirmPassword}/>
           </Input>
         </VStack>
 
