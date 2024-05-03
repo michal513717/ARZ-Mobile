@@ -10,6 +10,10 @@ const RegisterScreen = () => {
     setEmail,
     password,
     setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    displayName,
+    setDisplayName,
     loading,
     signUp
   } = useFirebaseAuth();
@@ -28,12 +32,21 @@ const RegisterScreen = () => {
           > Sign Up </Text>
         </Box>
 
-        <VStack space="xs" width="80%" paddingTop={60}>
+        <VStack space="xs" width="80%" paddingTop={50}>
           <Text color="$text500" lineHeight="$xs">
             Email
           </Text>
           <Input>
             <InputField type="text" placeholder="abcd@domain.com" value={email} onChangeText={setEmail}/>
+          </Input>
+        </VStack>
+
+        <VStack space="xs" width="80%" paddingTop={10}>
+          <Text color="$text500" lineHeight="$xs">
+            Display Name (Optional)
+          </Text>
+          <Input>
+            <InputField type="text" placeholder="Display Name" value={displayName} onChangeText={setDisplayName}/>
           </Input>
         </VStack>
 
@@ -51,7 +64,7 @@ const RegisterScreen = () => {
             Confirm Password
           </Text>
           <Input>
-            <InputField type="password" placeholder="**********" value={password} onChangeText={setPassword}/>
+            <InputField type="password" placeholder="**********" value={confirmPassword} onChangeText={setConfirmPassword}/>
           </Input>
         </VStack>
 

@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { FIREBASE_AUTH } from "../utils/firebase";
 import { useState } from "react";
 import { useAuthStore } from "../stores/authStore";
@@ -6,6 +6,8 @@ import { useAuthStore } from "../stores/authStore";
 const useFirebaseAuth = () => {
   const { email, setEmail, setUser, user } = useAuthStore();
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [loading, setLoading] = useState(false);
 
   const signIn = async () => {
@@ -23,8 +25,16 @@ const useFirebaseAuth = () => {
 
   const signUp = async () => {
     setLoading(true);
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        setLoading(false);
+        return;
+    }
     try {
-      await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
+      const userCredential = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
+      if (displayName) {
+        await updateProfile(userCredential.user, { displayName }); 
+      }
       alert("Check your email!");
     } catch (error) {
       alert("Sign up failed: " + error.message);
@@ -38,6 +48,10 @@ const useFirebaseAuth = () => {
     setEmail,
     password,
     setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    displayName,
+    setDisplayName,
     loading,
     signIn,
     signUp
