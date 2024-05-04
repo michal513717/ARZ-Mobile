@@ -11,9 +11,13 @@ import { useNavigation } from "@react-navigation/native";
 const HomeScreen = () => {
   const navigation = useNavigation<any>()/// <-- that isn't needed, you can directly use navigation prop
 
+  const currentUser = FIREBASE_AUTH.currentUser;
+  const userEmail = currentUser?.email;
+  const userDisplayName = currentUser?.displayName;
+
   return (
     <>
-      <Header userEmail={FIREBASE_AUTH.currentUser?.email} />
+      <Header userEmail={userEmail ?? ""} userDisplayName={userDisplayName} />
       <View>
         <View style={styles.containerContent}>
           <TouchableOpacity 

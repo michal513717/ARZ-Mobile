@@ -43,6 +43,14 @@ const useFirebaseAuth = () => {
     }
   };
 
+  const signOut = async () => {
+    try {
+      await FIREBASE_AUTH.signOut();
+    } catch (error) {
+      alert("Sign out failed: " + error.message);
+    }
+  };
+
   return {
     email,
     setEmail,
@@ -54,7 +62,8 @@ const useFirebaseAuth = () => {
     setDisplayName,
     loading,
     signIn,
-    signUp
+    signUp,
+    signOut,
   };
 };
 
