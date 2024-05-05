@@ -43,10 +43,10 @@ const RegisterScreen = () => {
 
         <VStack space="xs" width="80%" paddingTop={10}>
           <Text color="$text500" lineHeight="$xs">
-            Display Name (Optional)
+            Name (Optional)
           </Text>
           <Input>
-            <InputField type="text" placeholder="Display Name" value={displayName} onChangeText={setDisplayName}/>
+            <InputField type="text" placeholder="Your name" value={displayName} onChangeText={setDisplayName}/>
           </Input>
         </VStack>
 

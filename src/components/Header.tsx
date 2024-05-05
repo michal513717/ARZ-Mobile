@@ -4,12 +4,14 @@ import React from "react";
 import USER_PHOTO from "../../assets/user.png";
 import LOGOUT_ICON from "../../assets/logout.png";
 import useFirebaseAuth from "../hooks/useFirebaseAuth";
+import { useNavigation } from "@react-navigation/native";
 
 const Header: React.FC<{ userEmail: string; userDisplayName?: string }> = ({
   userEmail,
   userDisplayName,
 }) => {
 	
+  const navigation = useNavigation<any>();
   const { signOut } = useFirebaseAuth();
 
   return (
@@ -20,7 +22,9 @@ const Header: React.FC<{ userEmail: string; userDisplayName?: string }> = ({
         justifyContent="space-between"
         padding="$3"
       >
-        <Image source={USER_PHOTO} size="xs" />
+        <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
+          <Image source={USER_PHOTO} size="xs" />
+        </TouchableOpacity>
         <Text pr="$3">
           {userDisplayName ? ` ${userDisplayName}` : ` ${userEmail}`}
         </Text>
