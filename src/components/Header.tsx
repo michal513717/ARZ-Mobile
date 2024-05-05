@@ -23,14 +23,14 @@ const Header: React.FC<{ userEmail: string; userDisplayName?: string }> = ({
         padding="$3"
       >
         <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
-          <Image source={USER_PHOTO} size="xs" />
+          <Image source={USER_PHOTO} size="xs" alt="user photo" />
         </TouchableOpacity>
         <Text pr="$3">
           {userDisplayName ? ` ${userDisplayName}` : ` ${userEmail}`}
         </Text>
 
         <TouchableOpacity onPress={signOut}>
-          <Image source={LOGOUT_ICON} size="xs" />
+          <Image source={LOGOUT_ICON} size="xs" alt="logout icon" />
         </TouchableOpacity>
       </Box>
     </SafeAreaView>

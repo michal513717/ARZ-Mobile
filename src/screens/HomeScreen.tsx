@@ -31,6 +31,7 @@ const HomeScreen = () => {
                 borderWidth="$2" 
                 borderColor="$white"
                 borderRadius={16}
+                alt="map"
               />
             </Box>
           </TouchableOpacity>
