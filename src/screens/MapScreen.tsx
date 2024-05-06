@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Image} from "react-native";
+import { View, Image } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { TouchableOpacity } from "react-native";
 import { Text, Box } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import YACHT_ICON from "../../assets/yacht_icon.png";
+import useCurrentLocation from "../hooks/useCurrentLocation";
 
 const MapScreen = () => {
-  const [region, setRegion] = useState({
-    latitude: 50.06452,
-    longitude: 19.923259,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  });
+  const region = useCurrentLocation();
 
   const [markers, setMarkers] = useState([]);
 
@@ -28,16 +24,12 @@ const MapScreen = () => {
     setMarkers(fetchedMarkers);
   }, []);
 
-  const onRegionChangeComplete = (region) => {
-    setRegion(region);
-  };
-
   const navigation = useNavigation<any>();
 
   return (
-    <View style={styles.container}>
+    <View style={{flex: 1}}>
       <MapView
-        style={styles.map}
+        style={{flex: 1}}
         provider={PROVIDER_GOOGLE}
         region={region}
         showsMyLocationButton={true}
@@ -75,14 +67,5 @@ const MapScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    flex: 1,
-  },
-});
 
 export default MapScreen;

@@ -3,12 +3,14 @@ import { View } from "react-native";
 import { FIREBASE_AUTH } from "../utils/firebase";
 import styles from "../utils/styles/styles";
 import Header from "../components/Header";
-import { Box, Image, Text } from "@gluestack-ui/themed";
+import { Box } from "@gluestack-ui/themed";
 import { TouchableOpacity } from "react-native";
-import MapImage from "./../../assets/map.png";
 import { useNavigation } from "@react-navigation/native";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import useCurrentLocation from "../hooks/useCurrentLocation";
 
 const HomeScreen = () => {
+  const region = useCurrentLocation();
   const navigation = useNavigation<any>()/// <-- that isn't needed, you can directly use navigation prop
 
   const currentUser = FIREBASE_AUTH.currentUser;
@@ -24,21 +26,18 @@ const HomeScreen = () => {
             style={styles.mainMain}
             onPress={() => navigation.navigate('MapScreen')}  
           >
-            <Box w={270} h={270} >
-              <Image 
-                source={MapImage} 
-                size="full" 
-                borderWidth="$2" 
-                borderColor="$white"
-                borderRadius={16}
-                alt="map"
+            <Box w={270} h={270} style={{borderRadius: 16, overflow:"hidden"}}>
+              <MapView
+                style={{flex: 1}}
+                provider={PROVIDER_GOOGLE}
+                region={region}
+                showsUserLocation={true}
               />
             </Box>
           </TouchableOpacity>
         </View>
       </View>
     </>
-
   );
 };
 
