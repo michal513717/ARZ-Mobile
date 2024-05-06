@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image} from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { TouchableOpacity } from "react-native";
 import { Text, Box } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
+import YACHT_ICON from "../../assets/yacht_icon.png";
 
 const MapScreen = () => {
   const [region, setRegion] = useState({
@@ -48,7 +49,9 @@ const MapScreen = () => {
             coordinate={marker.coordinate}
             title={marker.title}
             description={marker.description}
-          />
+          >
+            <Image source={YACHT_ICON} style={{ width: 50, height: 50 }} />
+          </Marker>
         ))}
         <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
           <Box
