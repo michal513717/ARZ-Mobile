@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import getCurrentLocation from "./getCurrentLocation";
+import getStoreLocation from "./getStoreLocation";
 
 const useCurrentLocation = () => {
   const [region, setRegion] = useState({
@@ -13,23 +15,17 @@ const useCurrentLocation = () => {
   useEffect(() => {
     const getUserLocation = async () => {
       try {
-        let storedRegion = await AsyncStorage.getItem("cachedRegion");
-        if (storedRegion) {
-          setRegion(JSON.parse(storedRegion));
-        } else {
-          let { status } = await Location.requestForegroundPermissionsAsync();
-          if (status !== "granted") {
-            alert("Permission Denied. Please enable location access to use this feature.");
-            return;
-          }
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          alert("Permission Denied. Please enable location access to use this feature.");
+          return;
+        }
 
-          let location = await Location.getCurrentPositionAsync({});
-          const newRegion = {
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          };
+        const storedRegion = await getStoreLocation();
+        if (storedRegion) {
+          setRegion(storedRegion);
+        } else {
+          const newRegion = await getCurrentLocation();
           setRegion(newRegion);
           await AsyncStorage.setItem("cachedRegion", JSON.stringify(newRegion));
         }
