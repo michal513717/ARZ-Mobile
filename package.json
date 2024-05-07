@@ -20,6 +20,7 @@
     "@types/react": "~18.2.45",
     "expo": "~50.0.13",
     "expo-google-app-auth": "^10.0.0",
+    "expo-location": "^16.5.5",
     "expo-status-bar": "~1.11.1",
     "firebase": "^10.11.0",
     "react": "18.2.0",
