@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Image } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { TouchableOpacity } from "react-native";
-import { Text, Box } from "@gluestack-ui/themed";
-import { useNavigation } from "@react-navigation/native";
 import YACHT_ICON from "../../assets/yacht_icon.png";
 import useCurrentLocation from "../hooks/useCurrentLocation";
 
@@ -24,8 +21,6 @@ const MapScreen = () => {
     setMarkers(fetchedMarkers);
   }, []);
 
-  const navigation = useNavigation<any>();
-
   return (
     <View style={{flex: 1}}>
       <MapView
@@ -45,24 +40,6 @@ const MapScreen = () => {
             <Image source={YACHT_ICON} style={{ width: 50, height: 50 }} />
           </Marker>
         ))}
-        <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
-          <Box
-            bg="#ffffff"
-            w={120}
-            h={40}
-            justifyContent="center"
-            alignItems="center"
-            borderColor="#6198ff"
-            borderWidth={2}
-            borderRadius={10}
-            marginLeft={10}
-            marginTop={50}
-          >
-            <Text color="#6b6b6b" fontWeight="$800" fontSize={16}>
-              Back to Home
-            </Text>
-          </Box>
-        </TouchableOpacity>
       </MapView>
     </View>
   );
