@@ -16,7 +16,9 @@ const styles = StyleSheet.create({
   containerContent:{
     height: "100%",
     width: "100%",
-    backgroundColor: COLORS.lightGray
+    backgroundColor: COLORS.lightGray,
+    flex: 0,
+    alignItems: 'center',
   },
   inputContainer: {
     width: "80%",
