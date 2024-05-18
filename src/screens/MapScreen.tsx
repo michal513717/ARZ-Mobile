@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Image } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import YACHT_ICON from "../../assets/yacht_icon.png";
 import useCurrentLocation from "../hooks/useCurrentLocation";
 
@@ -25,7 +25,6 @@ const MapScreen = () => {
     <View style={{flex: 1}}>
       <MapView
         style={{flex: 1}}
-        provider={PROVIDER_GOOGLE}
         region={region}
         showsMyLocationButton={true}
         showsUserLocation={true}

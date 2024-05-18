@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import { Box } from "@gluestack-ui/themed";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import MapView from "react-native-maps";
 import useCurrentLocation from "../hooks/useCurrentLocation";
 
 const HomeScreen = () => {
@@ -29,7 +29,6 @@ const HomeScreen = () => {
             <Box w={270} h={270} style={{borderRadius: 16, overflow:"hidden"}}>
               <MapView
                 style={{flex: 1}}
-                provider={PROVIDER_GOOGLE}
                 region={region}
                 showsUserLocation={true}
               />

@@ -18,7 +18,7 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
     "@types/react": "~18.2.45",
-    "expo": "~50.0.13",
+    "expo": "^51.0.8",
     "expo-google-app-auth": "^10.0.0",
     "expo-location": "^16.5.5",
     "expo-status-bar": "~1.11.1",
