@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { FIRESTORE_DB } from "../utils/firebase";
 
-const useFirestore = (collectionName: string) => {
+const useFirestore = (collectionPath: string) => {
   const [documents, setDocuments] = useState([]);
 
   const fetchDocuments = async () => {
     try {
       const querySnapshot = await getDocs(
-        collection(FIRESTORE_DB, collectionName)
+        collection(FIRESTORE_DB, collectionPath)
       );
       const fetchedDocuments = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -22,7 +22,7 @@ const useFirestore = (collectionName: string) => {
 
   useEffect(() => {
     fetchDocuments();
-  }, [collectionName]);
+  }, [collectionPath]);
 
   return documents;
 };

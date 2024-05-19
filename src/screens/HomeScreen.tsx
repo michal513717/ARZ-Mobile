@@ -9,6 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import MapView from "react-native-maps";
 import useCurrentLocation from "../hooks/useCurrentLocation";
 import CompetitionModal from "../components/modals/CompetitionModal";
+import StageModal from "../components/modals/StageModal";
 
 const HomeScreen = () => {
   const region = useCurrentLocation();
@@ -22,6 +23,9 @@ const HomeScreen = () => {
   const [currentCompetitionId, setCurrentCompetitionId] = useState<string | null>(null);
   const [currentCompetitionName, setCurrentCompetitionName] = useState<string | null>(null);
 
+  const [isStageModalVisible, setStageModalVisible] = useState(false);
+  const [currentStageId, setCurrentStageId] = useState<string | null>(null);
+
   const handleJoinCompetition = (
     competitionId: string,
     competitionName: string
@@ -29,6 +33,11 @@ const HomeScreen = () => {
     setCurrentCompetitionId(competitionId);
     setCurrentCompetitionName(competitionName);
     setCompetitionModalVisible(false);
+  };
+
+  const handleChooseStage = (stageId: string) => {
+    setCurrentStageId(stageId);
+    setStageModalVisible(false);
   };
 
   return (
@@ -43,10 +52,17 @@ const HomeScreen = () => {
               </Text>
             </Box>
           )}
+          {currentStageId && (
+            <Box mt={10} mb={10}>
+              <Text fontWeight="bold" fontSize={18}>
+                Current stage: {currentStageId}
+              </Text>
+            </Box>
+          )}
 
           <TouchableOpacity
             style={styles.mainMain}
-            onPress={() => navigation.navigate("MapScreen")}
+            onPress={() => navigation.navigate("MapScreen", { competitionId: currentCompetitionId, stageId: currentStageId })}
           >
             <Box
               w={270}
@@ -76,12 +92,36 @@ const HomeScreen = () => {
               </Text>
             </Box>
           </TouchableOpacity>
+
+        {currentCompetitionId && (
+            <TouchableOpacity onPress={() => setStageModalVisible(true)}>
+              <Box
+                bg="#6198FF"
+                w={300}
+                h={59}
+                marginTop={20}
+                justifyContent="center"
+                alignItems="center"
+                borderRadius={10}
+              >
+                <Text color="#ffffff" fontWeight="$800" fontSize={24}>
+                  Choose stage
+                </Text>
+              </Box>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
       <CompetitionModal
         visible={isCompetitionModalVisible}
         onClose={() => setCompetitionModalVisible(false)}
         onJoinCompetition={handleJoinCompetition}
+      />
+      <StageModal
+        visible={isStageModalVisible}
+        onClose={() => setStageModalVisible(false)}
+        onChooseStage={handleChooseStage}
+        competitionId={currentCompetitionId ?? ""}
       />
     </>
   );

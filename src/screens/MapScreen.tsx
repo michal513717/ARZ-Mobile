@@ -1,25 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { View, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import YACHT_ICON from "../../assets/yacht_icon.png";
 import useCurrentLocation from "../hooks/useCurrentLocation";
+import useFirestore from "../hooks/useFirestore";
 
-const MapScreen = () => {
+const MapScreen = ({ route }: { route: any }) => {
+  const { competitionId, stageId } = route.params;
   const region = useCurrentLocation();
 
-  const [markers, setMarkers] = useState([]);
-
-  useEffect(() => {
-    const fetchedMarkers = [
-      {
-        id: 1,
-        title: "Marker 1",
-        description: "AGH",
-        coordinate: { latitude: 50.06452, longitude: 19.923259 },
-      },
-    ];
-    setMarkers(fetchedMarkers);
-  }, []);
+  const collectionPath = `Competitions/${competitionId}/CompetitionStages/${stageId}/Routes`;
+  const markers = useFirestore(collectionPath);
 
   return (
     <View style={{flex: 1}}>
@@ -32,7 +23,10 @@ const MapScreen = () => {
         {markers.map((marker) => (
           <Marker
             key={marker.id}
-            coordinate={marker.coordinate}
+            coordinate={{
+                latitude: marker.coordinate.latitude,
+                longitude: marker.coordinate.longitude,
+            }}
             title={marker.title}
             description={marker.description}
           >
