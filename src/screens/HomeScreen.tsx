@@ -32,6 +32,7 @@ const HomeScreen = () => {
   ) => {
     setCurrentCompetitionId(competitionId);
     setCurrentCompetitionName(competitionName);
+    setCurrentStageId(null);
     setCompetitionModalVisible(false);
   };
 
