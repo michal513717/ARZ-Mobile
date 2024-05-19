@@ -33,7 +33,7 @@ const RegisterScreen = () => {
         </Box>
 
         <VStack space="xs" width="80%" paddingTop={50}>
-          <Text color="$text500" lineHeight="$xs">
+          <Text color="#000000" lineHeight="$xs">
             Email
           </Text>
           <Input>
@@ -42,7 +42,7 @@ const RegisterScreen = () => {
         </VStack>
 
         <VStack space="xs" width="80%" paddingTop={10}>
-          <Text color="$text500" lineHeight="$xs">
+          <Text color="#000000" lineHeight="$xs">
             Name (Optional)
           </Text>
           <Input>
@@ -51,7 +51,7 @@ const RegisterScreen = () => {
         </VStack>
 
         <VStack space="xs" width="80%" paddingTop={30}>
-          <Text color="$text500" lineHeight="$xs">
+          <Text color="#000000" lineHeight="$xs">
             Password
           </Text>
           <Input>
@@ -60,7 +60,7 @@ const RegisterScreen = () => {
         </VStack>
 
         <VStack space="xs" width="80%" paddingTop={10}>
-          <Text color="$text500" lineHeight="$xs">
+          <Text color="#000000" lineHeight="$xs">
             Confirm Password
           </Text>
           <Input>

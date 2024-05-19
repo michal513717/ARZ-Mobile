@@ -28,9 +28,9 @@ const EmailModal: React.FC<EmailModalProps> = ({
           </Text>
           <Text
             color="#6b6b6b"
-            fontWeight="$800"
-            fontSize={18}
+            fontSize={16}
             textAlign="center"
+            marginBottom={10}
           >
             Current email: {userEmail}
           </Text>

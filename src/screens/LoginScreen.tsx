@@ -28,7 +28,7 @@ const LoginScreen = () => {
       </Box>
 
       <VStack space="xs" width="80%" paddingTop={60}>
-        <Text color="$text500" lineHeight="$xs">
+        <Text color="#000000" lineHeight="$xs">
           Email
         </Text>
         <Input>
@@ -37,7 +37,7 @@ const LoginScreen = () => {
       </VStack>
 
       <VStack space="xs" width="80%" paddingTop={30}>
-        <Text color="$text500" lineHeight="$xs">
+        <Text color="#000000" lineHeight="$xs">
           Password
         </Text>
         <Input>
